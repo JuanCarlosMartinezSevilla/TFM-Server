@@ -15,8 +15,8 @@ def document_analysis():
     image.save('temp.png')
     image = cv2.imread('temp.png')
     print(image.shape)
-    os.remove('temp.png')
-    return "ok uploaded"
+    #os.remove('temp.png')
+    return image.shape
 
 @app.route('/')
 def index():
