@@ -1,14 +1,22 @@
-from flask import Flask, jsonify
+from flask import Flask, jsonify, request
 import os
 import tensorflow as tf
+import cv2
 
-da_model = tf.keras.models.load_model('da.h5')
+da_model = tf.keras.models.load_model('tfm/document_analysis/model.h5')
+e2e_model = tf.keras.models.load_model('tfm/agnostic_end2end/model.h5')
 
 app = Flask(__name__)
 
-@app.route('/document_analysis', methods=['GET'])
+@app.route('/document_analysis', methods=['POST'])
 def document_analysis():
-    return jsonify({"bounding_box": "This is a bounding box"})
+    files = request.files
+    image = files['image']
+    image.save('temp.png')
+    image = cv2.imread('temp.png')
+    print(image.shape)
+    os.remove('temp.png')
+    return "ok uploaded"
 
 @app.route('/')
 def index():
