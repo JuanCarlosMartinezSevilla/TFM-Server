@@ -16,7 +16,7 @@ def document_analysis():
     image = cv2.imread('temp.png')
     print(image.shape)
     #os.remove('temp.png')
-    return image.shape
+    return "EVERYTHING WORKS"
 
 @app.route('/')
 def index():
