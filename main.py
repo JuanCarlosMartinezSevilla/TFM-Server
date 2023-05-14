@@ -3,11 +3,12 @@ import os, json
 import tensorflow as tf
 import cv2
 from bounding_boxes import get_bounding_boxes, preprocess_image_document_analysis, after_processing, preprocess_e2e, decode, preprocess_e2e_no
-
+from bounding_boxes import create_json
 da_model = tf.keras.models.load_model('tfm/document_analysis/model.h5')
 e2e_model = tf.keras.models.load_model('tfm/agnostic_end2end/model.h5')
 
 app = Flask(__name__)
+
 
 def e2e(image, bounding_boxes):
     sequences = []
@@ -56,10 +57,12 @@ def document_analysis():
     bounding_boxes = get_bounding_boxes(prediction)
 
     sequences = e2e(image, bounding_boxes)
-    print(sequences)
-
+    result = create_json(bounding_boxes, sequences)
+    # Convert numpy.int32 values to int
+    # result = convert_numpy_int32(result)
+    # result = convert_numpy_int64(result)
     os.remove('temp.png')
-    return "EVERYTHING WORKS"
+    return jsonify(result)
 
 @app.route('/')
 def index():

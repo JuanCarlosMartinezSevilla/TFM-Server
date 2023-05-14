@@ -23,10 +23,10 @@ def get_bounding_boxes(image):
 
         # Adjust the top and bottom coordinates of the bounding box
         bounding_box_adjusted = (
-            x,
-            y - height_increment,         # Adjust top coordinate by subtracting height_increment
-            x + width,
-            y + height + height_increment  # Adjust bottom coordinate by adding height_increment
+            int(x),
+            int(y - height_increment),         # Adjust top coordinate by subtracting height_increment
+            int(x + width),
+            int(y + height + height_increment)  # Adjust bottom coordinate by adding height_increment
         )
 
         print(bounding_box, bounding_box_adjusted)
@@ -67,7 +67,6 @@ def after_processing(prediction, height, width):
     prediction = np.where(prediction > threshold_value, 0, 1).astype(np.uint8)
     return prediction
 
-
 import itertools
 def decode(prediction, i2w):
     out_best = np.argmax(prediction, axis=2)
@@ -94,7 +93,19 @@ def preprocess_e2e_no(img):
     return img
 
 def create_json(bounding_boxes, sequences):
-    response = {}
+    response = []
 
-    # for b, s in zip(bounding_boxes, sequences):
-    #     response[]
+    # Extract the bounding box coordinates
+    # bounding_box = (x, y, x + width, y + height)
+    
+    for b, s in zip(bounding_boxes, sequences):
+        region = {}
+        region["fromX"] = b[0]
+        region["fromY"] = b[1]
+        region["toX"] = b[2]
+        region["toY"] = b[3]
+        region["seq"] = s
+        response.append(region)
+
+    res = {"prediction": response}
+    return res
