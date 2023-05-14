@@ -58,10 +58,43 @@ def preprocess_image_document_analysis(image_path):
 
 def after_processing(prediction, height, width):
     # quito la dimensión del batch
-    prediction =  np.squeeze(prediction, axis=0)
+    prediction = np.squeeze(prediction, axis=0)
     prediction = cv2.resize(prediction, (width, height), interpolation=cv2.INTER_AREA)
     
     # Perform thresholding to convert the image to binary
     threshold_value = 0.5
     # Binarize the image using the threshold value
     prediction = np.where(prediction > threshold_value, 0, 1).astype(np.uint8)
+    return prediction
+
+
+import itertools
+def decode(prediction, i2w):
+    out_best = np.argmax(prediction, axis=2)
+    #print("out_best-> ", out_best)
+    out_best = [k for k, g in itertools.groupby(list(out_best[0]))]
+    return [i2w[f"{s}"] for s in out_best if s != len(i2w)]
+
+def preprocess_e2e(img):
+    img = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+    img = (255. - img) / 255.
+    #img = img / 255.
+    new_height = 64
+    new_width = int(new_height * img.shape[1] / img.shape[0])
+    img = cv2.resize(img, (new_width, new_height), interpolation=cv2.INTER_AREA)
+    img = np.expand_dims(img, axis=(0, 3))
+    return img
+
+def preprocess_e2e_no(img):
+    img = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+    img = (255. - img)
+    new_height = 64
+    new_width = int(new_height * img.shape[1] / img.shape[0])
+    img = cv2.resize(img, (new_width, new_height), interpolation=cv2.INTER_AREA)
+    return img
+
+def create_json(bounding_boxes, sequences):
+    response = {}
+
+    # for b, s in zip(bounding_boxes, sequences):
+    #     response[]
