@@ -35,6 +35,10 @@ def e2e(image, bounding_boxes):
         sequences.append(pred)
     return sequences
 
+@app.route('/prueba_post', methods=['POST'])
+def prueba_post():
+    return jsonify({"prueba": "La prueba funciona"})
+
 @app.route('/document_analysis', methods=['POST'])
 def document_analysis():
     files = request.files
@@ -70,4 +74,4 @@ def index():
 
 
 if __name__ == '__main__':
-    app.run(debug=False, port=os.getenv("PORT", default=5000))
+    app.run(debug=True, port=os.getenv("PORT", default=5000))
