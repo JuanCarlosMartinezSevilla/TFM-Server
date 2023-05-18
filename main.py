@@ -66,8 +66,8 @@ def document_analysis():
 
 @app.route('/')
 def index():
-    return jsonify({"Choo Choo": "Welcome to your Flask app 🚅"})
+    return jsonify({"TFM-server": "Welcome to Juan Carlos Martinez TFM Flask Server"})
 
 
 if __name__ == '__main__':
-    app.run(debug=True, port=os.getenv("PORT", default=5000))
+    app.run(debug=False, port=os.getenv("PORT", default=5000))
