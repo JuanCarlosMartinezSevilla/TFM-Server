@@ -42,6 +42,8 @@ def prueba_post():
 @app.route('/document_analysis', methods=['POST'])
 def document_analysis():
     files = request.files
+    print(request)
+    print("====FILES======", request.files)
     image = files['image']
     image.save('temp.png')
     image = cv2.imread('temp.png', cv2.IMREAD_COLOR)
