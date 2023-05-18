@@ -107,5 +107,5 @@ def create_json(bounding_boxes, sequences):
         region["seq"] = s
         response.append(region)
 
-    res = {"prediction": response}
-    return res
+    #res = {"prediction": response}
+    return response
