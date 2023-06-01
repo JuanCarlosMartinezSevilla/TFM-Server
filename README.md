@@ -1,23 +1,17 @@
----
-title: Flask
-description: A popular minimal server framework for Python
-tags:
-  - python
-  - flask
----
+# SheetVision Server TFM
 
-# Python Flask Example
+<!-- Improved compatibility of back to top link: See: https://github.com/othneildrew/Best-README-Template/pull/73 -->
+<a name="readme-top"></a>
 
-This is a [Flask](https://flask.palletsprojects.com/en/1.1.x/) app that serves a simple JSON response.
+[![Platform](https://img.shields.io/static/v1?label=Platform&message=Railway.App&color=blue&style=for-the-badge)]()
+[![Tech](https://img.shields.io/static/v1?label=Technology&message=Python&color=orange&style=for-the-badge)]()
+[![License](https://img.shields.io/static/v1?label=License&message=MIT&color=green&style=for-the-badge)]()
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-Profile-blue?style=for-the-badge&logo=linkedin)](https://www.linkedin.com/in/juan-carlos-martinez-sevilla/)
 
-[![Deploy on Railway](https://railway.app/button.svg)](https://railway.app/new/template/zUcpux)
 
-## ✨ Features
 
-- Python
-- Flask
-
-## 💁‍♀️ How to use
-
-- Install Python requirements `pip install -r requirements.txt`
-- Start the server for development `python3 main.py`
+<!-- PROJECT LOGO -->
+<br />
+<div align="center">
+  <h3 align="center">Servidor encargado de realizar la predicción de las regiones y las secuencias</h3>
+</div>
